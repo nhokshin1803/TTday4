@@ -16,10 +16,21 @@ class Database
     private $accessoryTable = [];
 
     //methods
+
+    /**
+     * constructor
+     * @param null
+     * @return null
+     */
     private function __construct()
     {
     }
 
+    /**
+     * Singleton get instance
+     * @param null
+     * @return mixed
+     */
     public static function getInstance()
     {
 
@@ -30,30 +41,40 @@ class Database
         return self::$instance;
     }
 
-    function insertTable($name, $row)
+    /**
+     * insert an element into table
+     * @param $name, $element
+     * @return mixed
+     */
+    function insertTable($name, $element)
     {
-        if (!($row instanceof Product || $row instanceof Accessory || $row instanceof Category)) {
+        if (!($element instanceof Product || $element instanceof Accessory || $element instanceof Category)) {
             return false;
         }
 
         if ($name == self::PRODUCT) {
-            $this->productTable[] = $row;
+            $this->productTable[] = $element;
             return $this->productTable;
         }
 
         if ($name == self::ACCESSORY) {
-            $this->accessoryTable[] = $row;
+            $this->accessoryTable[] = $element;
             return $this->accessoryTable;
         }
 
         if ($name == self::CATEGORY) {
-            $this->categoryTable[] = $row;
+            $this->categoryTable[] = $element;
             return $this->categoryTable;
         }
 
         return false;
     }
 
+    /**
+     * select a table
+     * @param $name
+     * @return mixed
+     */
     function selectTable($name)
     {
 
@@ -70,30 +91,35 @@ class Database
         }
     }
 
-    function updateTable($name, $row)
+    /**
+     * update a table
+     * @param $name
+     * @return mixed
+     */
+    function updateTable($name, $element)
     {
-        if (!($row instanceof Product || $row instanceof Accessory || $row instanceof Category)) {
+        if (!($element instanceof Product || $element instanceof Accessory || $element instanceof Category)) {
             return false;
         }
 
         if ($name == self::PRODUCT) {
             for ($i = 0; $i < sizeof(self::getInstance()->productTable); $i++) {
-                self::getInstance()->productTable[$i]->setName($row);
+                self::getInstance()->productTable[$i]->setName($element);
             }
             return true;
         }
 
         if ($name == self::ACCESSORY) {
             for ($i = 0; $i < sizeof(self::getInstance()->accessoryTable); $i++) {
-                self::getInstance()->accessoryTable[$i]->setName($row);
+                self::getInstance()->accessoryTable[$i]->setName($element);
             }
             return true;
         }
 
         if ($name == self::CATEGORY) {
             for ($i = 0; $i < sizeof(self::getInstance()->categoryTable); $i++) {
-                if ($row->id == self::getInstance()->categoryTable[$i]->getId()) {
-                    self::getInstance()->categoryTable[$i]->setName($row->name);
+                if ($element->id == self::getInstance()->categoryTable[$i]->getId()) {
+                    self::getInstance()->categoryTable[$i]->setName($element->name);
                 }
             }
             return true;
@@ -102,26 +128,36 @@ class Database
         return false;
     }
 
-    function deleteTable($name, $row)
+    /**
+     * delete a table
+     * @param $name
+     * @return mixed
+     */
+    function deleteTable($name, $element)
     {
-        if (!($row instanceof Product || $row instanceof Accessory || $row instanceof Category)) {
+        if (!($element instanceof Product || $element instanceof Accessory || $element instanceof Category)) {
             return false;
         }
 
         if ($name == self::PRODUCT) {
-            array_splice($this->productTable, $row->getId() - 1, 1);
+            array_splice($this->productTable, $element->getId() - 1, 1);
             return true;
         } else if ($name == self::ACCESSORY) {
-            array_splice($this->accessoryTable, $row->getId() - 1, 1);
+            array_splice($this->accessoryTable, $element->getId() - 1, 1);
             return true;
         } else if ($name == self::CATEGORY) {
-            array_splice($this->categoryTable, $row->getId() - 1, 1);
+            array_splice($this->categoryTable, $element->getId() - 1, 1);
             return true;
         }
 
         return false;
     }
 
+    /**
+     * truncate a table
+     * @param $name
+     * @return mixed
+     */
     function truncateTable($name)
     {
 
@@ -139,31 +175,36 @@ class Database
         return false;
     }
 
-    function updateTableById($id, $row)
+    /**
+     * update an element by its id
+     * @param $name
+     * @return mixed
+     */
+    function updateTableById($id, $element)
     {
 
-        if (!($row instanceof Product || $row instanceof Accessory || $row instanceof Category)) {
+        if (!($element instanceof Product || $element instanceof Accessory || $element instanceof Category)) {
             return false;
         }
 
-        if ($row instanceof Product) {
+        if ($element instanceof Product) {
             for ($i = 0; $i < sizeof($this->productTable); $i++) {
                 if ($id == $this->productTable[$i]->getId()) {
-                    $this->productTable[$i] = $row;
+                    $this->productTable[$i] = $element;
                 }
             }
             return true;
-        } else if ($row instanceof Accessory) {
+        } else if ($element instanceof Accessory) {
             for ($i = 0; $i < sizeof($this->accessoryTable); $i++) {
                 if ($id == $this->accessoryTable[$i]->getId()) {
-                    $this->accessoryTable[$i] = $row;
+                    $this->accessoryTable[$i] = $element;
                 }
             }
             return true;
-        } else if ($row instanceof Category) {
+        } else if ($element instanceof Category) {
             for ($i = 0; $i < sizeof($this->categoryTable); $i++) {
                 if ($id == $this->categoryTable[$i]->getId()) {
-                    $this->categoryTable[$i] = $row;
+                    $this->categoryTable[$i] = $element;
                 }
             }
             return true;
