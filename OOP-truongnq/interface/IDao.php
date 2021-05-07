@@ -1,9 +1,12 @@
 <?php
-interface IDao {
-    function findById($id);
-    
-    function findByName($name);
+interface IDao
+{
 
-    function search($where);
+    function insertElement($row);
+    function updateElement($row);
+    function deleteElement($row);
+    function findAll();
+    function findElementById($id);
+    function findElementByName($name);
+    function searchElementByIndex($index);
 }
-?>

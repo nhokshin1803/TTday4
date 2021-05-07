@@ -2,27 +2,34 @@
 require_once "../dao/Database.php";
 require_once "../dao/ProductDAO.php";
 require_once "../entity/Product.php";
-class ProductDaoDemo {
+class ProductDaoDemo
+{
     public ProductDAO $cD;
 
-    function __construct() {
-        $this->cD = new ProductDAO(); 
+    //constructor
+    function __construct()
+    {
+        $this->cD = new ProductDAO();
     }
 
-    function insertTest() {
-        $this->cD->insert(new Product(1, "Trang"));
-        $this->cD->insert(new Product(1, "Trang"));
-        $this->cD->insert(new Product(1, "Trang"));
+    //test insert element into table
+    function insertTest()
+    {
+        $this->cD->insertElement(new Product(1, "Trang"));
+        $this->cD->insertElement(new Product(1, "Trang"));
+        $this->cD->insertElement(new Product(1, "Trang"));
     }
 
-    function findAllTest() {
-        $this->cD->findAll();
+    //print a table
+    function findAllTest()
+    {
     }
 
-    function updateTest() {
-        $this->cD->update(new Product(1, "Trang"));
+    //update an element of a table
+    function updateTest()
+    {
+        $this->cD->updateElement(new Product(1, "Trang"));
     }
 }
 
 $cDD = new ProductDaoDemo();
-?>

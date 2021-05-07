@@ -1,57 +1,40 @@
-<?php 
+<?php
 require_once "../entity/Accessory.php";
 require_once "../dao/Database.php";
 require_once "BaseDAO.php";
 require_once "../interface/IDao.php";
 
-class AccessoryDAO extends BaseDAO implements IDao {
-    protected $name = "accessory";
+class AccessoryDAO extends BaseDAO implements IDao
+{
+
+    //properties
+    protected $entityName = "accessory";
+
     //methods
-
-    function __construct() {
-        parent::__construct();
-    }
-
-    function insert($row) {
-        parent::insert($row);
-    }
-
-    function update($row) {
-        parent::update($row);
-
-    }
-
-    function delete($row) {
-        parent::delete($row);
-    }
-
-    function findAll(){
-        parent::findAll();
-    }
-
-    function findById($id) {
-        for($i = 0; $i < sizeof(Database::getInstance()->accessoryTable); $i++) {
-            if(Database::getInstance()->accessoryTable[$i]->get_id() == $id) {
+    function findElementById($entityId)
+    {
+        for ($i = 0; $i < sizeof(Database::getInstance()->accessoryTable); $i++) {
+            if (Database::getInstance()->accessoryTable[$i]->getId() == $entityId) {
                 return Database::getInstance()->accessoryTable[$i];
             }
-        }        
+        }
     }
 
-    function findByName($name) {
-        for($i = 0; $i < sizeof(Database::getInstance()->accessoryTable); $i++) {
-            if(Database::getInstance()->accessoryTable[$i]->get_name() == $name) {
+    function findElementByName($entityName)
+    {
+        for ($i = 0; $i < sizeof(Database::getInstance()->accessoryTable); $i++) {
+            if (Database::getInstance()->accessoryTable[$i]->getName() == $entityName) {
                 return Database::getInstance()->accessoryTable[$i];
             }
-        }        
+        }
     }
 
-    function search($where) {
-        for($i = 0; $i < sizeof(Database::getInstance()->accessoryTable); $i++) {
-            if($where == $i) {
+    function searchElementByIndex($where)
+    {
+        for ($i = 0; $i < sizeof(Database::getInstance()->accessoryTable); $i++) {
+            if ($where == $i) {
                 return Database::getInstance()->accessoryTable[$i];
             }
-        }   
+        }
     }
-
 }
-?>

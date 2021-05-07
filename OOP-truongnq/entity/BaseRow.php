@@ -1,24 +1,34 @@
 <?php
-abstract class BaseRow {
-    function __construct($id, $name) {
-        $this->id = $id;
-        $this->name = $name; 
-    }
-    
-    function set_id($id) {
-        $this->id = $id;
-    }
+abstract class BaseRow
+{
+    //property
+    public int $id;
+    public string $name;
 
-    function get_id() {
-        return $this->id;
-    }
-
-    function set_name($name) {
+    //methods
+    function __construct($id, $name)
+    {
+        $this->id = $id;
         $this->name = $name;
     }
 
-    function get_name() {
+    function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    function getId()
+    {
+        return $this->id;
+    }
+
+    function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    function getName()
+    {
         return $this->name;
     }
 }
-?>

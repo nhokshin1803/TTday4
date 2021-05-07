@@ -2,28 +2,34 @@
 require_once "../dao/Database.php";
 require_once "../dao/AccessoryDAO.php";
 require_once "../entity/Accessory.php";
-class AccessoryDaoDemo {
+class AccessoryDaoDemo
+{
     public AccessoryDAO $cD;
 
-    function __construct() {
-        $this->cD = new AccessoryDAO(); 
+    function __construct()
+    {
+        $this->cD = new AccessoryDAO();
     }
 
-    function insertTest() {
-        $this->cD->insert(new Accessory(1, "Trang"));
+    function insertElementTest()
+    {
+        $this->cD->insertElement(new Accessory(1, "Trang"));
     }
 
-    function findAllTest() {
-        $this->cD->findAll();
+    function findAllTest()
+    {
+        $testDatabase = $this->cD->findAll();
+        print_r($testDatabase);
     }
 
-    function updateTest() {
-        $this->cD->update(new Accessory(1, "Trang"));
+    function updateElementTest()
+    {
+        $this->cD->updateElement(new Accessory(1, "Trang"));
     }
 }
 
 $aDD = new AccessoryDaoDemo();
-$aDD->insertTest();
+echo ("Test");
+$aDD->insertElementTest();
 // $cDD->updateTest();
 $aDD->findAllTest();
-?>

@@ -2,31 +2,36 @@
 require_once "../dao/Database.php";
 require_once "../dao/CategoryDAO.php";
 require_once "../entity/Category.php";
-class CategoryDaoDemo {
+class CategoryDaoDemo
+{
     public CategoryDAO $cD;
 
-    function __construct() {
-        $this->cD = new CategoryDAO(); 
+    function __construct()
+    {
+        $this->cD = new CategoryDAO();
     }
 
-    function insertTest() {
-        $this->cD->insert(new Category(1,"Truong"));
-        $this->cD->insert(new Category(2,"Trung"));
-        $this->cD->insert(new Category(3,"Trang"));
+    function insertElementTest()
+    {
+        $this->cD->insertElement(new Category(1, "Truong"));
+        $this->cD->insertElement(new Category(2, "Trung"));
+        $this->cD->insertElement(new Category(3, "Trang"));
     }
 
-    function findAllTest() {
-        $this->cD->findAll();
+    function findAllTest()
+    {
+        $testDB = $this->cD->findAll();
+        print_r($testDB);
     }
 
-    function updateTest() {
-        $this->cD->update(new Category(1, "Trang"));
+    function updateElementTest()
+    {
+        $this->cD->updateElement(new Category(1, "Trang"));
     }
 }
 
 $cDD = new CategoryDaoDemo();
-$cDD->insertTest();
+$cDD->insertElementTest();
 $cDD->findAllTest();
-$cDD->updateTest();
+$cDD->updateElementTest();
 $cDD->findAllTest();
-?>
