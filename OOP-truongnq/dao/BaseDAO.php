@@ -31,7 +31,7 @@ abstract class BaseDAO
      */
     function updateElement($element)
     {
-        return Database::getInstance()->updateTable($this->name, $element);
+        return Database::getInstance()->updateTable($this->entityName, $element);
     }
 
     /**
@@ -41,7 +41,7 @@ abstract class BaseDAO
      */
     function deleteElement($element)
     {
-        return Database::getInstance()->deleteTable($this->name, $element);
+        return Database::getInstance()->deleteTable($this->entityName, $element);
     }
 
     /**
@@ -51,27 +51,30 @@ abstract class BaseDAO
      */
     function determineTable($tableName)
     {
-        $tempTable = [];
         if ($tableName = "accessory") {
-            $tempTable = Database::getInstance()->accessoryTable;
+            return Database::getInstance()->accessoryTable;
         } elseif ($tableName = "category") {
-            $tempTable = Database::getInstance()->categoryTable;
+            return Database::getInstance()->categoryTable;
         } elseif ($tableName = "product") {
-            $tempTable = Database::getInstance()->productTable;
-        }
-        return $tempTable;
+            return Database::getInstance()->productTable;
+        } else return null;
     }
 
     /**
      * find all element
-     * @param $entityId
+     * @param null
      * @return mixed
      */
     function findAll()
     {
-        return Database::getInstance()->selectTable($this->name);
+        return Database::getInstance()->selectTable($this->entityName);
     }
 
+    /**
+     * find an element by its id
+     * @param $entityId, $tableName
+     * @return mixed
+     */
     function findElementById($entityId, string $tableName)
     {
         $tempTable = $this->determineTable($tableName);
@@ -81,11 +84,13 @@ abstract class BaseDAO
                 return $tempTable[$i];
             }
         }
+
+        return null;
     }
 
     /**
      * find an element by its name
-     * @param $entityId
+     * @param $entityId, $tableName
      * @return mixed
      */
     function findElementByName($entityName, string $tableName)
@@ -96,11 +101,13 @@ abstract class BaseDAO
                 return $tempTable[$i];
             }
         }
+
+        return null;
     }
 
     /**
      * find an element by its index
-     * @param $entityId
+     * @param $index, $tableName
      * @return mixed
      */
     function searchElementByIndex($index, string $tableName)

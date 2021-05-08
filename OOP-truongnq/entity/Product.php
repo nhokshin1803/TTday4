@@ -8,4 +8,22 @@ class Product extends BaseRow implements IEntity
     protected int $categoryId;
 
     //methods
+
+    /**
+     * get category id
+     * @param null
+     * @return mixed
+     */
+    function getCategoryId() {
+        return $this->categoryId;
+    }
+
+    /**
+     * set category id
+     * @param $categoryId
+     * @return null
+     */
+    public function setCategoryId($categoryId) {
+        $this->categoryId = $categoryId;
+    }
 }

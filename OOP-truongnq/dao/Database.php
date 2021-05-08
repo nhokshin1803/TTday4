@@ -103,13 +103,15 @@ class Database
         }
 
         if ($name == self::PRODUCT) {
-            for ($i = 0; $i < sizeof(self::getInstance()->productTable); $i++) {
+            $productTableSize = sizeof(self::getInstance()->productTable);
+            for ($i = 0; $i < $productTableSize; $i++) {
                 self::getInstance()->productTable[$i]->setName($element);
             }
             return true;
         }
 
         if ($name == self::ACCESSORY) {
+            $accessoryTableSize = sizeof(self::getInstance()->accessoryTable);
             for ($i = 0; $i < sizeof(self::getInstance()->accessoryTable); $i++) {
                 self::getInstance()->accessoryTable[$i]->setName($element);
             }
@@ -117,6 +119,7 @@ class Database
         }
 
         if ($name == self::CATEGORY) {
+            $categoryTableSize = sizeof(self::getInstance()->categoryTable);
             for ($i = 0; $i < sizeof(self::getInstance()->categoryTable); $i++) {
                 if ($element->id == self::getInstance()->categoryTable[$i]->getId()) {
                     self::getInstance()->categoryTable[$i]->setName($element->name);
@@ -133,7 +136,7 @@ class Database
      * @param $name
      * @return mixed
      */
-    function deleteTable($name, $element)
+    function deleteElement($name, $element)
     {
         if (!($element instanceof Product || $element instanceof Accessory || $element instanceof Category)) {
             return false;
@@ -162,12 +165,15 @@ class Database
     {
 
         if ($name == self::PRODUCT) {
+            unset($this->productTable);
             $this->productTable = [];
             return true;
         } else if ($name == self::ACCESSORY) {
+            unset($this->accessoryTable);
             $this->accessoryTable = [];
             return true;
         } else if ($name == self::CATEGORY) {
+            unset($this->categoryTable);
             $this->categoryTable = [];
             return true;
         }
